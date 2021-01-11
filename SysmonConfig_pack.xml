@@ -1,0 +1,210 @@
+<Sysmon schemaversion="4.22">
+  <HashAlgorithms>md5,sha256</HashAlgorithms>
+  <EventFiltering>
+  <!-- EVENT ID 1: PROCESS CREATION [ProcessCreate]-->
+    <ProcessCreate onmatch="exclude">
+      <Image condition="end with">Google\Update\GoogleUpdate.exe</Image>
+      <Image condition="end with">MpCmdRun.exe</Image>
+      <Image condition="end with">windows\sysmon.exe</Image>
+      <Image condition="end with">windows\sysmon64.exe</Image>
+      <Image condition="end with">windows\system32\searchprotocolhost.exe</Image>
+      <Image condition="end with">windows\system32\audiodg.exe</Image>
+      <Image condition="end with">windows\system32\consent.exe</Image>
+      <Image condition="end with">windows\system32\dllhost.exe</Image>
+      <Image condition="end with">windows\system32\msiexec.exe</Image>
+      <Image condition="end with">windows\system32\taskhost.exe</Image>
+      <Image condition="end with">windows\system32\winlogon.exe</Image>
+      <Image condition="end with">autorunsc.exe</Image>
+      <Image condition="end with">chrome.exe</Image>
+      <Image condition="end with">windows\System32\SearchFilterHost.exe</Image>
+      <Image condition="end with">windows\explorer.exe</Image>
+      <Image condition="end with">windows\system32\LogonUI.exe</Image>
+      <Image condition="end with">windows\system32\conhost.exe</Image>
+      <Image condition="end with">windows\system32\lsass.exe</Image>
+      <Image condition="end with">windows\system32\svchost.exe</Image>
+    </ProcessCreate>
+  <!-- EVENT ID 3: NETWORK CONNECTION INITIATED [NetworkConnect]-->
+    <NetworkConnect onmatch="include">
+      <Image condition="contains">\ProgramData</Image>
+      <Image condition="contains">\Users</Image>
+      <Image condition="contains">\Windows\Temp</Image>
+      <Image condition="image">AA_v</Image> 
+      <Image condition="image">at.exe</Image>
+      <Image condition="image">cdb.exe</Image>
+      <Image condition="image">certutil.exe</Image> 
+      <Image condition="image">cmd.exe</Image> 
+      <Image condition="image">cmstp.exe</Image>
+      <Image condition="image">cscript.exe</Image>
+      <Image condition="image">dbgsrv.exe</Image>
+      <Image condition="image">driverquery.exe</Image>
+      <Image condition="image">dsquery.exe</Image>
+      <Image condition="image">excel.exe</Image>
+      <Image condition="image">hh.exe</Image>
+      <Image condition="image">hpsmhd.exe</Image> 
+      <Image condition="image">infDefaultInstall.exe</Image>
+      <Image condition="image">installutil.exe</Image>
+      <Image condition="image">java.exe</Image>
+      <Image condition="image">javaw.exe</Image>
+      <Image condition="image">javaws.exe</Image>
+      <Image condition="image">mmc.exe</Image>
+      <Image condition="image">msbuild.exe</Image>
+      <Image condition="image">mshta.exe</Image>
+      <Image condition="image">msiexec.exe</Image>
+      <Image condition="image">nbtstat.exe</Image>
+      <Image condition="image">nc.exe</Image>
+      <Image condition="image">ncat.exe</Image>
+      <Image condition="image">net.exe</Image>
+      <Image condition="image">net1.exe</Image>
+      <Image condition="image">nmap.exe</Image>
+      <Image condition="image">notepad.exe</Image>
+      <Image condition="image">nslookup.exe</Image>
+      <Image condition="image">omniinet.exe</Image>
+      <Image condition="image">powershell.exe</Image>
+      <Image condition="image">psexec.exe</Image>
+      <Image condition="image">psexesvc.exe</Image>
+      <Image condition="image">psinfo.exe</Image>
+      <Image condition="image">qprocess.exe</Image>
+      <Image condition="image">qwinsta.exe</Image> 
+      <Image condition="image">qwinsta.exe</Image> 
+      <Image condition="image">reg.exe</Image>
+      <Image condition="image">regsvcs.exe</Image>
+      <Image condition="image">regsvr32.exe</Image>
+      <Image condition="image">rundll32.exe</Image>
+      <Image condition="image">rwinsta.exe</Image>
+      <Image condition="image">sc.exe</Image>
+      <Image condition="image">schtasks.exe</Image>
+      <Image condition="image">taskkill.exe</Image>
+      <Image condition="image">tasklist.exe</Image>
+      <Image condition="image">tor.exe</Image>
+      <Image condition="image">vnc.exe</Image>
+      <Image condition="image">vncservice.exe</Image>
+      <Image condition="image">vncviewer.exe</Image>
+      <Image condition="image">winexesvc.exe</Image>
+      <Image condition="image">winword.exe</Image>
+      <Image condition="image">wmic.exe</Image>
+      <Image condition="image">wscript.exe</Image>
+      <DestinationPort condition="is">22</DestinationPort>
+      <DestinationPort condition="is">23</DestinationPort>
+      <DestinationPort condition="is">25</DestinationPort>
+      <DestinationPort condition="is">142</DestinationPort>
+      <DestinationPort condition="is">3389</DestinationPort>
+      <DestinationPort condition="is">5800</DestinationPort>
+      <DestinationPort condition="is">5900</DestinationPort>
+      <DestinationPort condition="is">1080</DestinationPort>
+      <DestinationPort condition="is">3128</DestinationPort>
+      <DestinationPort condition="is">8080</DestinationPort>
+      <DestinationPort condition="is">1723</DestinationPort>
+      <DestinationPort condition="is">4500</DestinationPort>
+      <DestinationPort condition="is">9001</DestinationPort>
+      <DestinationPort condition="is">9030</DestinationPort>
+    </NetworkConnect>
+    <NetworkConnect onmatch="exclude">
+      <Image condition="image">avp.exe</Image>
+      <Image condition="image">chrome.exe</Image>
+    </NetworkConnect>
+  <!-- EVENT ID 8: REMOTE THREAD CREATED [CreateRemoteThread]-->
+    <CreateRemoteThread onmatch="exclude">
+    </CreateRemoteThread>
+  <!-- EVENT ID 10: INTER-PROCESS ACCESS [ProcessAccess]-->
+    <ProcessAccess onmatch="include">
+      <TargetImage condition="contains">\Windows\system32\lsass.exe</TargetImage>
+    </ProcessAccess>
+    <ProcessAccess onmatch="exclude">
+      <SourceImage condition="end with">vmware-authd.exe</SourceImage>
+      <SourceImage condition="end with">wmiprvse.exe</SourceImage>
+      <SourceImage condition="end with">avp.exe</SourceImage>
+      <SourceImage condition="end with">taskmgr.exe</SourceImage>
+      <SourceImage condition="end with">GoogleUpdate.exe</SourceImage> 
+      <SourceImage condition="end with">AdobeARM.exe</SourceImage>
+    </ProcessAccess>
+  <!-- EVENT ID 11: FILE CREATED [FileCreate]-->
+    <FileCreate onmatch="include">
+      <TargetFilename condition="contains">Normal.dotm</TargetFilename>
+      <TargetFilename condition="contains">\Startup</TargetFilename>
+      <TargetFilename condition="contains">\appdata\roaming\microsoft\templates\</TargetFilename>      
+      <TargetFilename condition="contains">\htdocs\</TargetFilename>
+      <TargetFilename condition="contains">\html\</TargetFilename>
+      <TargetFilename condition="contains">\jsp\</TargetFilename>
+      <TargetFilename condition="contains">\start menu\programs\startup\</TargetFilename>
+      <TargetFilename condition="contains">\www\</TargetFilename>
+      <TargetFilename condition="contains">inetpub\wwwroot</TargetFilename>
+      <TargetFilename condition="end with">.ace</TargetFilename>
+      <TargetFilename condition="end with">.asp</TargetFilename>
+      <TargetFilename condition="end with">.aspx</TargetFilename>
+      <TargetFilename condition="end with">.bat</TargetFilename>
+      <TargetFilename condition="end with">.cmd</TargetFilename>
+      <TargetFilename condition="end with">.cpl</TargetFilename>
+      <TargetFilename condition="end with">.cs</TargetFilename>
+      <TargetFilename condition="end with">.csproj</TargetFilename>
+      <TargetFilename condition="end with">.dll</TargetFilename>
+      <TargetFilename condition="end with">.epf</TargetFilename>
+      <TargetFilename condition="end with">.exe</TargetFilename>
+      <TargetFilename condition="end with">.hta</TargetFilename>
+      <TargetFilename condition="end with">.js</TargetFilename>
+      <TargetFilename condition="end with">.jsp</TargetFilename>
+      <TargetFilename condition="end with">.jspx</TargetFilename>
+      <TargetFilename condition="end with">.kirbi</TargetFilename>
+      <TargetFilename condition="end with">.lnk</TargetFilename>
+      <TargetFilename condition="end with">.mht</TargetFilename>
+      <TargetFilename condition="end with">.mof</TargetFilename>
+      <TargetFilename condition="end with">.php</TargetFilename>
+      <TargetFilename condition="end with">.pif</TargetFilename>
+      <TargetFilename condition="end with">.png</TargetFilename>
+      <TargetFilename condition="end with">.proj</TargetFilename>
+      <TargetFilename condition="end with">.ps1</TargetFilename>
+      <TargetFilename condition="end with">.pub</TargetFilename>
+      <TargetFilename condition="end with">.py</TargetFilename>
+      <TargetFilename condition="end with">.scr</TargetFilename>
+      <TargetFilename condition="end with">.sct</TargetFilename>
+      <TargetFilename condition="end with">.vbe</TargetFilename>
+      <TargetFilename condition="end with">.vbs</TargetFilename>
+      <TargetFilename condition="end with">.wll</TargetFilename>
+      <TargetFilename condition="end with">.wrn</TargetFilename>
+      <TargetFilename condition="end with">.wsf</TargetFilename>
+      <TargetFilename condition="end with">.xll</TargetFilename>
+      <TargetFilename condition="end with">.xsl</TargetFilename>
+      <TargetFilename condition="end with">.xz</TargetFilename>
+      <Image condition="end with">lsass.exe</Image>
+      <Image condition="end with">mimilsa</Image>
+      <Image condition="end with">rundll32.exe</Image>
+    </FileCreate>
+    <FileCreate onmatch="exclude">
+      <TargetFilename condition="contains">\Microsoft\Office</TargetFilename>
+      <TargetFilename condition="contains">\Roaming\Microsoft\Windows\Recent\</TargetFilename>
+      <Image condition="end with">MpCmdRun.exe</Image>
+    </FileCreate>
+  <!-- EVENT ID 12 & 13 & 14: REGISTRY MODIFICATION [RegistryEvent]-->
+  <!-- EVENT 12: "Registry object added or deleted"-->
+  <!-- EVENT 13: "Registry value set"-->
+  <!-- EVENT 14: "Registry objected renamed"-->
+    <RegistryEvent onmatch="include">
+      <TargetObject condition="contains">Account\Users</TargetObject>
+      <TargetObject condition="contains">Control\Lsa</TargetObject>
+      <TargetObject condition="contains">Control\Terminal Server</TargetObject>
+      <TargetObject condition="contains">Control\WMI\Autologger\</TargetObject>
+      <TargetObject condition="contains">CurrentVersion\Windows\Run</TargetObject>
+      <TargetObject condition="contains">Microsoft\Windows NT\CurrentVersion\Winlogon</TargetObject>
+      <TargetObject condition="contains">Policies\Microsoft\Windows\CredentialsDelegation\</TargetObject>
+      <TargetObject condition="contains">SecurityProviders\WDigest</TargetObject>
+      <TargetObject condition="contains">Software\Classes\exefile\shell\runas\command</TargetObject>
+      <TargetObject condition="contains">Software\Microsoft\Windows\CurrentVersion\App Paths</TargetObject>
+      <TargetObject condition="contains">System\Setup</TargetObject>
+      <TargetObject condition="contains">Windows\CurrentVersion\Internet Settings\ProxyServer</TargetObject>
+      <TargetObject condition="contains">Windows\CurrentVersion\Run</TargetObject>
+      <TargetObject condition="contains">Windows\CurrentVersion\RunOnce</TargetObject>
+      <TargetObject condition="contains">\Control panel\cpls</TargetObject>
+      <TargetObject condition="contains">\Currentversion\Image File Execution Options\</TargetObject>
+      <TargetObject condition="contains">\Enviroment</TargetObject>
+      <TargetObject condition="contains">\Windows Script\Settings\AmsiEnable</TargetObject>
+      <TargetObject condition="contains">\control panel\desktop</TargetObject>
+      <TargetObject condition="contains">\excel\options</TargetObject>
+      <TargetObject condition="contains">classes\clsid\*\inprocserver32</TargetObject>
+      <TargetObject condition="contains">currentversion\silentprocessexit</TargetObject>
+      <TargetObject condition="contains">services\PortProxy\v4tov4\tcp</TargetObject>
+    </RegistryEvent>
+    <RegistryEvent onmatch="exclude">
+      <Image condition="contains">\Program Files\Kaspersky Lab\</Image>
+    </RegistryEvent>
+  <!-- EVENT ID 255: ERROR-->
+  </EventFiltering>
+</Sysmon>
